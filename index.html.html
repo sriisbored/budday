@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Letter For You 🌻</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+    margin:0;
+    height:100vh;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:
+    linear-gradient(
+        135deg,
+        #fff7d6,
+        #ffe7a3,
+        #ffd56a
+    );
+
+    font-family:'Caveat', cursive;
+}
+
+/* Floating Sunflowers */
+
+.sunflower{
+    position:absolute;
+    font-size:40px;
+    animation: float 8s ease-in-out infinite;
+    opacity:0.85;
+}
+
+.sun1{
+    top:10%;
+    left:10%;
+}
+
+.sun2{
+    top:15%;
+    right:12%;
+    animation-delay:2s;
+}
+
+.sun3{
+    bottom:15%;
+    left:12%;
+    animation-delay:4s;
+}
+
+.sun4{
+    bottom:10%;
+    right:10%;
+    animation-delay:1s;
+}
+
+@keyframes float{
+    0%,100%{
+        transform:translateY(0px);
+    }
+    50%{
+        transform:translateY(-15px);
+    }
+}
+
+.container{
+    text-align:center;
+    z-index:10;
+}
+
+/* Envelope */
+
+.envelope{
+    width:250px;
+    height:170px;
+    background:#d8a15d;
+    position:relative;
+    margin:auto;
+    cursor:pointer;
+    border-radius:8px;
+    box-shadow:0 12px 25px rgba(0,0,0,0.18);
+    transition:0.4s;
+}
+
+.envelope:hover{
+    transform:translateY(-5px) scale(1.03);
+}
+
+.envelope::before{
+    content:"";
+    position:absolute;
+    top:-85px;
+    left:0;
+
+    border-left:125px solid transparent;
+    border-right:125px solid transparent;
+    border-bottom:85px solid #e5b777;
+}
+
+.envelope-text{
+    position:absolute;
+    width:100%;
+    top:65px;
+    font-size:34px;
+    color:white;
+}
+
+.subtitle{
+    margin-top:30px;
+    color:#7c5b1b;
+    font-size:28px;
+}
+
+/* Letter Pages */
+
+.page{
+    display:none;
+}
+
+.page img{
+    max-width:90vw;
+    max-height:85vh;
+
+    border-radius:15px;
+
+    box-shadow:
+    0 15px 35px rgba(0,0,0,0.18);
+
+    cursor:pointer;
+
+    animation:fadeIn .8s ease;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:scale(.96);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+.instruction{
+    margin-top:15px;
+    font-size:24px;
+    color:#7c5b1b;
+}
+
+.final-message{
+    display:none;
+    font-size:42px;
+    color:#8a5d00;
+    text-align:center;
+    animation:fadeIn 1s ease;
+}
+
+/* Sparkles */
+
+.sparkle{
+    position:absolute;
+    font-size:22px;
+    opacity:0.8;
+    animation:twinkle 3s infinite;
+}
+
+@keyframes twinkle{
+    50%{
+        opacity:0.2;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="sunflower sun1">🌻</div>
+<div class="sunflower sun2">🌻</div>
+<div class="sunflower sun3">🌻</div>
+<div class="sunflower sun4">🌻</div>
+
+<div class="sparkle" style="top:20%;left:30%;">✨</div>
+<div class="sparkle" style="top:75%;right:25%;">✨</div>
+<div class="sparkle" style="top:40%;right:15%;">✨</div>
+<div class="sparkle" style="bottom:25%;left:20%;">✨</div>
+
+<div class="container">
+
+    <div class="envelope" id="envelope">
+        <div class="envelope-text">💌</div>
+    </div>
+
+    <div class="subtitle">
+        click! ☀️
+    </div>
+
+    <div class="page" id="pageContainer">
+        <img id="letterPage" src="page1.png">
+        <div class="instruction">
+            Click to turn the page 🌻
+        </div>
+    </div>
+
+    <div class="final-message" id="finalMessage">
+        🌻 Happy Birthday 🌻
+     
+    </div>
+
+</div>
+
+<script>
+
+const pages = [
+    "page_1.png",
+    "page_2.png",
+    "page_3.png",
+    "page_4.png"
+];
+
+let currentPage = 0;
+
+const envelope = document.getElementById("envelope");
+const pageContainer = document.getElementById("pageContainer");
+const letterPage = document.getElementById("letterPage");
+const finalMessage = document.getElementById("finalMessage");
+
+envelope.addEventListener("click", () => {
+
+    envelope.style.display = "none";
+
+    document.querySelector(".subtitle").style.display = "none";
+
+    pageContainer.style.display = "block";
+});
+
+pageContainer.addEventListener("click", () => {
+
+    currentPage++;
+
+    if(currentPage < pages.length){
+
+        letterPage.src = pages[currentPage];
+
+    } else {
+
+        pageContainer.style.display = "none";
+
+        finalMessage.style.display = "block";
+    }
+});
+
+</script>
+
+</body>
+</html>
